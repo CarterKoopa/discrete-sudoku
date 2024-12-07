@@ -1,7 +1,12 @@
 """
-Sudoku graph class
+This module creates a class `SudokuGraph`, which uses a graph coloring
+approach to solve Sudoku puzzles. The class uses the NetworkX library 
+to represent Sudoku as a graph, where vertices represent the cells and
+edges represent the constraints for each cell. Each unique value in the
+cells correspond to a different color.
 
-# TODO: WORK IN PROGRESS - Audrey
+So far, this class has the ability to solve Sudoku using the DSatur
+algorithm, which colors vertices based on their degrees of saturation.
 """
 
 import random
@@ -15,17 +20,56 @@ import numpy as np
 
 class SudokuGraph:
     """
-    Creates a class for Suduko graph
+    A class to represent a Sudoku puzzle as a graph and solve it using
+    graph coloring algorithms.
+
+    Attributes:
+        self.puzzle: A 2D Numpy array representing the unfinished
+        Sudoku puzzle.
+        self.size: An integer representing the size of Sudoku
+        puzzle, where the amount of vertices = size ** 4.
+        self.graph: A NetworkX graph object representing the Sudoku
+        pizzle as a graph.
+        self.mapping: A dictionary mapping each vertex to its color
+        value (or in this case, the numerical value). The keys are
+        integers that represent the index of the vertex, and the
+        values are the value of the vertex at that index. Each
+        vertex value corresponds to a different color. A value of 0
+        indicates that the vertex is "uncolored" (as in, it has no
+        value assigned to it yet) while any other value indicates
+        that it is colored. When solving the Sudoku puzzle, this
+        will be the attribute that is modified and updated with new
+        number assignments.
+            self.original_mapping: The original Sudoku puzzle
+            without modifications (the blank, unsolved puzzle).
+            self.solution: The solve Sudoku puzzle.
+
+    Methods:
+        check_size(): Validates that the Sudoku puzzle is a square
+        grid.
+        reset_puzzle(): Resets the puzzle to its original state.
+        get_degrees_of_saturation(): Calculates the degree of
+        saturation and unsaturation for uncolored vertices.
+        select_max_degree_of_saturation(): Selects the vertex with the
+        maximum degree of saturation.
+        get_value_counts(): Counts occurrences of each value in the
+        Sudoku puzzle.
+        dsatur(): Solves the Sudoku puzzle using the DSatur
+        algorithm.
+        graph_sudoku(): Visualizes the Sudoku puzzle as a graph using
+        Matplotlib.
     """
 
-    def __init__(self, puzzle):
+    def __init__(self, sudoku_puzzle):
         """
         Initialize the SudokuGraph class with a given puzzle.
+        This will turn the Sudoku puzzle into a graph representation.
 
         Inputs:
-            puzzle: A 2D Numpy array representing the unfinished Sudoku puzzle.
+            puzzle: A 2D Numpy array representing the unfinished Sudoku
+            puzzle. It must be square and contain only integers.
         """
-        self.puzzle = puzzle
+        self.puzzle = sudoku_puzzle
         self.size = self.check_size()
         self.graph = nx.sudoku_graph(self.size)
         # Maps each node in graph to its corresponding value
