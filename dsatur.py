@@ -309,7 +309,7 @@ def dsatur(graph, vertex_mapping, inf=False):
     return vertex_mapping, elapsed_time, attempts
 
 
-def graph_sudoku(vertex_mapping, fig_size: int = 9, size: int = 3):
+def graph_sudoku(graph, vertex_mapping, fig_size: int = 9, size: int = 3):
     """
     Visualize the Sudoku game as a graph using Networkx and Matplotlib.
     Each cell in the game is represented by a vertex, and the colors of
@@ -337,7 +337,9 @@ def graph_sudoku(vertex_mapping, fig_size: int = 9, size: int = 3):
     """
 
     # Create positions for the nodes in a grid layout
-    pos = dict(zip(list(G.nodes()), nx.grid_2d_graph(size * size, size * size).nodes()))
+    pos = dict(
+        zip(list(graph.nodes()), nx.grid_2d_graph(size * size, size * size).nodes())
+    )
 
     # Determine the minimum and maximum values in the vertex mappin
     low, *_, high = sorted(vertex_mapping.values())
@@ -350,7 +352,7 @@ def graph_sudoku(vertex_mapping, fig_size: int = 9, size: int = 3):
     # Create the graph
     plt.figure(figsize=(fig_size, fig_size))
     nx.draw(
-        G,
+        graph,
         labels=vertex_mapping,  # Use vertex_mapping for labeling nodes
         pos=pos,  # Positions of the nodes
         with_labels=True,  # Display labels on the nodes
@@ -394,4 +396,4 @@ mapping = dict(
 # Call the functions :)
 # This make take a while to run
 test_mapping, _, _ = dsatur(G, mapping, inf=True)
-graph_sudoku(test_mapping)
+graph_sudoku(G, test_mapping)
