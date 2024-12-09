@@ -43,6 +43,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import networkx as nx
+import sudoku_puzzles
 
 
 def get_degrees_of_saturation(graph, vertex_mapping):
@@ -373,19 +374,7 @@ def graph_sudoku(graph, vertex_mapping, fig_size: int = 9, size: int = 3):
 # --- 0s mean that the cell is not filled in
 
 # Here is a sample puzzle
-puzzle = np.asarray(
-    [
-        [0, 4, 3, 0, 8, 0, 2, 5, 0],
-        [6, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 9, 4],
-        [9, 0, 0, 0, 0, 4, 0, 7, 0],
-        [0, 0, 0, 6, 0, 8, 0, 0, 0],
-        [0, 1, 0, 2, 0, 0, 0, 0, 3],
-        [8, 2, 0, 5, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 5],
-        [0, 3, 4, 0, 9, 0, 7, 1, 0],
-    ]
-)
+puzzle = sudoku_puzzles.puzzle_hard_2
 
 N = 3  # Make the sudoku grid 3x3 (standard 9x9)
 G = nx.sudoku_graph(N)  # Creates a graph representation of Sudoku
