@@ -29,6 +29,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import time
 import random
+import copy
 
 # Import test puzzles
 import sudoku_puzzles
@@ -54,6 +55,7 @@ def greedy(graph, vertex_mapping):
     # long the entire process takes.
     attempts = 0
     start_time = time.time()
+    original_vertex_mapping = copy.deepcopy(vertex_mapping)
 
     while True:
         # Track if the loop should break. Assume yes, until an invalid case is
@@ -100,6 +102,7 @@ def greedy(graph, vertex_mapping):
                 attempts = attempts + 1
                 # Start a new iteration by randomizing the order the vertices will
                 # be colored in (randomize vertex_mapping)
+                vertex_mapping = original_vertex_mapping
                 vertex_mapping = shuffle_dict(vertex_mapping)
                 # break from the current for loop and run again
                 solved = False
@@ -200,7 +203,7 @@ def main():
     N = 3  # Make the sudoku grid 3x3 (standard 9x9)
     G = nx.sudoku_graph(N)  # Creates a graph representation of Sudoku
 
-    mapping = dict(zip(G.nodes(), sudoku_puzzles.puzzle_easy.flatten()))
+    mapping = dict(zip(G.nodes(), sudoku_puzzles.puzzle_hard_1.flatten()))
 
     test_mapping, _, _ = greedy(G, mapping)
     graph_sudoku(G, test_mapping)
