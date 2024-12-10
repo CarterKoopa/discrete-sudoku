@@ -15,7 +15,8 @@ puzzle = np.asarray(
         [8, 2, 0, 5, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 5],
         [0, 3, 4, 0, 9, 0, 7, 1, 0],
-    ])
+    ]
+)
 
 n = 3
 G = nx.sudoku_graph(n)
@@ -56,6 +57,7 @@ def generate_random_sudoku(n):
     nums = sample(range(1, n * n + 1), n * n)
     board = [nums[_pattern(r, c)] for r in rows for c in cols]
     return board
+
 
 board = generate_random_sudoku(n)
 mapping = dict(zip(G.nodes(), board))
@@ -131,6 +133,7 @@ def plot_edge_colored_sudoku(n=3, layout="grid"):
         G, pos=pos, edgelist=column_edges, width=2, edge_color="tab:green"
     )
     plt.show()
+
 
 plot_edge_colored_sudoku()
 

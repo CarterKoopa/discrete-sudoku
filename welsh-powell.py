@@ -86,7 +86,7 @@ def main():
     N = 3  # Make the sudoku grid 3x3 (standard 9x9)
     G = nx.sudoku_graph(N)  # Creates a graph representation of Sudoku
 
-    mapping = dict(zip(G.nodes(), sudoku_puzzles.puzzle_super_easy.flatten()))
+    mapping = dict(zip(G.nodes(), sudoku_puzzles.puzzle_easy.flatten()))
 
     test_mapping = welsh_powell(G, mapping)
     graph_sudoku(G, test_mapping)

@@ -146,7 +146,6 @@ def select_max_degree_of_saturation(graph, vertex_mapping):
 
     # Check if there are multiple with the highest degree of saturation
     if list(colored_dictionary.values()).count(max_degree_of_saturation) > 1:
-
         # Look for all of the vertices with the highest degree found
         contenders = [
             vertex
@@ -253,7 +252,6 @@ def dsatur(graph, vertex_mapping, inf=False):
 
     # Run the loop until a valid configuration is found
     while True:
-
         # Get the uncolored vertices
         current_vertex, _ = select_max_degree_of_saturation(graph, vertex_mapping)
 
