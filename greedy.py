@@ -30,8 +30,6 @@ import networkx as nx
 import time
 import random
 
-# from dsatur import graph_sudoku
-
 # Import test puzzles
 import sudoku_puzzles
 
@@ -194,32 +192,20 @@ def graph_sudoku(graph, vertex_mapping, fig_size: int = 9, size: int = 3):
     plt.show()  # Show the graph
 
 
-# Run 10 times and return average runtimes and number of attempts
-N = 3  # Make the sudoku grid 3x3 (standard 9x9)
-G = nx.sudoku_graph(N)  # Creates a graph representation of Sudoku
+def main():
+    """
+    Runs the Greedy coloring algorithm for an example puzzle.
+    """
 
-mapping = dict(zip(G.nodes(), sudoku_puzzles.puzzle_super_easy.flatten()))
+    N = 3  # Make the sudoku grid 3x3 (standard 9x9)
+    G = nx.sudoku_graph(N)  # Creates a graph representation of Sudoku
 
-all_times = []
-all_attempts = []
+    mapping = dict(zip(G.nodes(), sudoku_puzzles.puzzle_super_easy.flatten()))
 
-test_mapping, _, _ = greedy(G, mapping)
-graph_sudoku(G, test_mapping)
+    test_mapping, _, _ = greedy(G, mapping)
+    graph_sudoku(G, test_mapping)
 
-"""
-for _ in range(9):
-    current_puzzle = random.choice(sudoku_puzzles.all_puzzles)
-    mapping = dict(
-        zip(G.nodes(), current_puzzle.flatten())
-    )  # Maps each vertex in graph to its corresponding value
-    # Call the functions :)
-    # This make take a while to run
-    test_mapping, current_elapsed_time, current_attempts = greedy(G, mapping)
-    # graph_sudoku(G, test_mapping)
-    all_times.append(current_elapsed_time)
-    all_attempts.append(current_attempts)
-    
-average_time = sum(all_times) / len(all_times)
-average_attempts = sum(all_attempts) / len(all_attempts)
-print(f"Average attempts: {average_attempts} | Average time: {average_time:.2f}")
-"""
+
+# Run the main function.
+if __name__ == "__main__":
+    main()
