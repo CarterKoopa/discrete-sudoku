@@ -1,3 +1,12 @@
+"""
+This module provides functions to generate and visualize Sudoku puzzles using NetworkX and Matplotlib.
+
+Functions:
+    generate_random_sudoku(n): Generates a random Sudoku board.
+    separate_edges(n): Separates the edges of the Sudoku graph into row, box, and column edges.
+    plot_edge_colored_sudoku(n=3, layout="grid"): Plots a Sudoku graph with edge coloring based on rows, boxes, and columns.
+"""
+
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -46,6 +55,15 @@ from random import sample
 
 # Generate random sudoku
 def generate_random_sudoku(n):
+    """
+    Generate a random Sudoku board.
+
+    Args:
+        n (int): The size of the smaller grid (e.g., 3 for a 9x9 Sudoku).
+
+    Returns:
+        list: A list representing the Sudoku board.
+    """
     side = n * n
 
     def _pattern(r, c):
@@ -87,6 +105,15 @@ import itertools
 
 
 def separate_edges(n):
+    """
+    Separate the edges of the Sudoku graph into row, box, and column edges.
+
+    Args:
+        n (int): The size of the smaller grid (e.g., 3 for a 9x9 Sudoku).
+
+    Returns:
+        tuple: Three lists containing the row edges, box edges, and column edges.
+    """
     G = nx.sudoku_graph(n)
     box_edges = []
     row_edges = []
@@ -113,6 +140,16 @@ def separate_edges(n):
 
 
 def plot_edge_colored_sudoku(n=3, layout="grid"):
+    """
+    Plot a Sudoku graph with edge coloring based on rows, boxes, and columns.
+
+    Args:
+        n (int): The size of the smaller grid (e.g., 3 for a 9x9 Sudoku).
+        layout (str): The layout for the graph ('grid' or 'circular').
+
+    Returns:
+        None
+    """
     row_edges, box_edges, column_edges = separate_edges(n)
     G = nx.sudoku_graph(n)
     board = generate_random_sudoku(n)
