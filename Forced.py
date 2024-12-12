@@ -1,3 +1,9 @@
+"""
+Individually goes through each cell and checks if there is 
+only one possible value that can be placed in that cell. 
+Repeating that process until the board is filled.
+"""
+
 # N is the size of the 2D matrix   N*N
 N = 9
 
@@ -113,5 +119,3 @@ if solveSudoku(grid, 0, 0):
     printing(grid)
 else:
     print("no solution  exists ")
-
-    # This code is contributed by sudhanshgupta2019a
