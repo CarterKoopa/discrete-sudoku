@@ -8,7 +8,7 @@ Final Project about Graph Coloring &amp; Sudoku for Fall 2024 Discrete Math at O
 This repository requires several libraries; running the requirements file below will install them for you.
 
 ```bash
-```pip install -r requirements.txt```
+pip install -r requirements.txt
 ```
 
 ## Methodology
